@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ほめことばレッスン</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Hiragino Kaku Gothic ProN', 'Meiryo', sans-serif;
+            background: linear-gradient(to bottom, #fce7f3, #fed7aa);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 500px;
+            width: 100%;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #ea580c;
+            margin-bottom: 15px;
+        }
+        
+        .subtitle {
+            font-size: 0.9rem;
+            color: #6b7280;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            padding: 40px;
+            min-height: 250px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 25px;
+        }
+        
+        .placeholder {
+            color: #d1d5db;
+            font-size: 1.2rem;
+        }
+        
+        .theme-display {
+            text-align: center;
+            width: 100%;
+        }
+        
+        .sparkles {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            display: inline-block;
+            animation: spin 2s linear infinite;
+        }
+        
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .theme-text {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #1f2937;
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+        
+        .theme-label {
+            font-size: 1.2rem;
+            color: #ec4899;
+            margin-bottom: 20px;
+        }
+        
+        .input-area {
+            margin-top: 25px;
+        }
+        
+        .praise-input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid #fbcfe8;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            text-align: center;
+            outline: none;
+            margin-bottom: 15px;
+        }
+        
+        .praise-input:focus {
+            border-color: #f472b6;
+        }
+        
+        .submit-btn {
+            background: #ec4899;
+            color: white;
+            font-weight: bold;
+            padding: 15px 35px;
+            border-radius: 50px;
+            border: none;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .submit-btn:hover:not(:disabled) {
+            background: #db2777;
+        }
+        
+        .submit-btn:disabled {
+            background: #d1d5db;
+            cursor: not-allowed;
+        }
+        
+        .reaction-display {
+            text-align: center;
+            width: 100%;
+        }
+        
+        .celebration {
+            font-size: 4.5rem;
+            margin-bottom: 20px;
+            animation: bounce 1s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .reaction-box {
+            background: linear-gradient(to right, #fef3c7, #fce7f3, #fef3c7);
+            border: 4px solid #fbbf24;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+        
+        .reaction-message {
+            font-size: 1.6rem;
+            font-weight: bold;
+            color: #db2777;
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        .hearts {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .heart {
+            font-size: 2.5rem;
+            animation: bounce 1s infinite;
+        }
+        
+        .heart:nth-child(1) { animation-delay: 0s; }
+        .heart:nth-child(2) { animation-delay: 0.1s; }
+        .heart:nth-child(3) { animation-delay: 0.2s; }
+        
+        .user-praise-box {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        
+        .user-praise-text {
+            font-size: 1.3rem;
+            color: #1f2937;
+            font-weight: bold;
+        }
+        
+        .final-message {
+            font-size: 1.1rem;
+            color: #be185d;
+            font-weight: bold;
+        }
+        
+        .main-btn {
+            width: 100%;
+            background: linear-gradient(to right, #f472b6, #fb923c);
+            color: white;
+            font-weight: bold;
+            padding: 20px;
+            border-radius: 50px;
+            border: none;
+            font-size: 1.3rem;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s;
+        }
+        
+        .main-btn:hover {
+            transform: scale(1.05);
+            background: linear-gradient(to right, #ec4899, #f97316);
+        }
+        
+        .footer-text {
+            text-align: center;
+            font-size: 0.8rem;
+            color: #6b7280;
+            margin-top: 25px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 class="title">ほめことばレッスン</h1>
+            <p class="subtitle">今日は何をほめましょうかねぇ</p>
+        </div>
+
+        <div class="card" id="mainCard">
+            <p class="placeholder">ボタンを押してね</p>
+        </div>
+
+        <button class="main-btn" id="mainBtn">今日のお題は?</button>
+
+        <p class="footer-text">些細なことでもほめると、心がほっこりするわよ</p>
+    </div>
+
+    <script>
+        const themes = [
+            '今日すれ違った人の靴',
+            'スーパーのレジの人の手際',
+            '近所の猫の座り方',
+            '自分の今日の靴下選び',
+            '冷蔵庫の中の整理具合',
+            '今朝の自分の寝癖',
+            '電車で見かけた人のカバン',
+            'コンビニの店員さんの笑顔',
+            '自販機のボタンの押しやすさ',
+            '今日飲んだお茶の温度',
+            '郵便受けに入ってたチラシのデザイン',
+            '信号待ちの時の自分の姿勢',
+            'エレベーターのボタンの反応',
+            '今日見た雲の形',
+            'ゴミ出しの時の自分の動き',
+            '植木鉢の土の湿り具合',
+            '玄関の靴の並び方',
+            'リモコンの置き場所',
+            '窓から見える電線の張り方',
+            '今日の洗濯物の干し方'
+        ];
+
+        const reactions = [
+            'まぁ!素晴らしいわ!よく気づいたわね!',
+            'あらあら!いいところに目をつけたわね!',
+            'すごいすごい!そういう見方があったのね!',
+            'まぁ!センスあるわ〜!',
+            'えらいえらい!よくほめられたわね!',
+            'あら素敵!そんな風に言えるなんて!',
+            'まぁ!優しい子ね〜!',
+            'わぁ!おばさん感動しちゃった!',
+            'すごいわ!ほめ上手ね!',
+            'あらあら!心が温かくなったわ!'
+        ];
+
+        let currentTheme = '';
+        let currentState = 'initial'; // initial, theme, reaction
+
+        const mainCard = document.getElementById('mainCard');
+        const mainBtn = document.getElementById('mainBtn');
+
+        mainBtn.addEventListener('click', handleMainButton);
+
+        function handleMainButton() {
+            if (currentState === 'initial' || currentState === 'reaction') {
+                showTheme();
+            } else if (currentState === 'theme') {
+                showTheme();
+            }
+        }
+
+        function showTheme() {
+            currentTheme = themes[Math.floor(Math.random() * themes.length)];
+            currentState = 'theme';
+            
+            mainCard.innerHTML = `
+                <div class="theme-display">
+                    <div class="sparkles">✨</div>
+                    <p class="theme-text">${currentTheme}</p>
+                    <p class="theme-label">をほめてあげて!</p>
+                    <div class="input-area">
+                        <input type="text" class="praise-input" id="praiseInput" placeholder="ほめ言葉を書いてね">
+                        <button class="submit-btn" id="submitBtn" disabled>送信する!</button>
+                    </div>
+                </div>
+            `;
+            
+            mainBtn.textContent = '別のお題にする';
+            
+            const praiseInput = document.getElementById('praiseInput');
+            const submitBtn = document.getElementById('submitBtn');
+            
+            praiseInput.addEventListener('input', function() {
+                submitBtn.disabled = this.value.trim() === '';
+            });
+            
+            praiseInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter' && this.value.trim() !== '') {
+                    showReaction(this.value);
+                }
+            });
+            
+            submitBtn.addEventListener('click', function() {
+                const value = praiseInput.value;
+                if (value.trim() !== '') {
+                    showReaction(value);
+                }
+            });
+        }
+
+        function showReaction(userPraise) {
+            const reaction = reactions[Math.floor(Math.random() * reactions.length)];
+            currentState = 'reaction';
+            
+            mainCard.innerHTML = `
+                <div class="reaction-display">
+                    <div class="celebration">🎉</div>
+                    <div class="reaction-box">
+                        <p class="reaction-message">${reaction}</p>
+                        <div class="hearts">
+                            <span class="heart">❤️</span>
+                            <span class="heart">❤️</span>
+                            <span class="heart">❤️</span>
+                        </div>
+                        <div class="user-praise-box">
+                            <p class="user-praise-text">「${userPraise}」</p>
+                        </div>
+                        <p class="final-message">って言えるあなたが素敵よ!</p>
+                    </div>
+                </div>
+            `;
+            
+            mainBtn.textContent = '次のお題!';
+        }
+    </script>
+</body>
+</html>
